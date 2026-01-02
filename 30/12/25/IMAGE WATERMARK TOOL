@@ -1,0 +1,7 @@
+from PIL import Image, ImageDraw, ImageFont
+
+img = Image.open("sample.jpg")
+draw = ImageDraw.Draw(img)
+font = ImageFont.load_default()
+draw.text((10, 10), "Watermark", font=font, fill=(255,255,255))
+img.save("watermarked.jpg")
