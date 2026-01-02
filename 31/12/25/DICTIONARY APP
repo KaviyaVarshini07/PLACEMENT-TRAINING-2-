@@ -1,0 +1,4 @@
+dictionary = {"python": "A programming language", "java": "Another programming language"}
+
+word = input("Enter word: ").lower()
+print(dictionary.get(word, "Word not found"))
