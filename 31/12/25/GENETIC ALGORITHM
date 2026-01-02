@@ -1,0 +1,10 @@
+import random
+
+def fitness(x): return x**2
+population = [random.randint(1, 50) for _ in range(10)]
+for _ in range(5):
+    population = sorted(population, key=fitness, reverse=True)
+    parents = population[:2]
+    child = sum(parents)//2
+    population[-1] = child
+print("Best:", max(population, key=fitness))
