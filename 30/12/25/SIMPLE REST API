@@ -1,0 +1,13 @@
+from fastapi import FastAPI
+
+app = FastAPI()
+todos = []
+
+@app.get("/todos")
+def get_todos():
+    return todos
+
+@app.post("/todos")
+def add(todo: str):
+    todos.append(todo)
+    return {"msg": "Added!"}
