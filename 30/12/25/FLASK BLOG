@@ -1,0 +1,15 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+posts = []
+
+@app.route("/")
+def home():
+    return render_template("index.html", posts=posts)
+
+@app.route("/add", methods=["POST"])
+def add():
+    posts.append(request.form["content"])
+    return "Post added!"
+
+app.run(debug=True)
