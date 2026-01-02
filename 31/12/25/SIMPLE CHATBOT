@@ -1,0 +1,14 @@
+def chatbot(msg):
+    responses = {
+        "hi": "Hello!",
+        "bye": "Goodbye!",
+        "how are you": "I'm doing fine."
+    }
+    return responses.get(msg.lower(), "I don't understand.")
+
+while True:
+    user = input("You: ")
+    if user.lower() == "bye":
+        print("Bot:", chatbot(user))
+        break
+    print("Bot:", chatbot(user))
