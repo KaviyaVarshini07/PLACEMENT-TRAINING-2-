@@ -1,0 +1,10 @@
+import matplotlib.pyplot as plt
+
+fruits = ["Apple", "Banana", "Cherry"]
+counts = [10, 15, 7]
+
+plt.bar(fruits, counts)
+plt.xlabel("Fruits")
+plt.ylabel("Count")
+plt.title("Fruit Count Bar Chart")
+plt.show()
