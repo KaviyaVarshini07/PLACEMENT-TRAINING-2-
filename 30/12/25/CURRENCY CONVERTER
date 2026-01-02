@@ -1,0 +1,8 @@
+import requests
+
+amount = float(input("Amount in USD: "))
+url = "https://api.exchangerate-api.com/v4/latest/USD"
+data = requests.get(url).json()
+rate = data["rates"]["INR"]
+
+print(f"{amount} USD = {amount * rate} INR")
