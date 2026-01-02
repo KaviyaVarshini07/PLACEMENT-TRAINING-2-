@@ -1,0 +1,4 @@
+from gensim.summarization import summarize
+
+text = """Python is a powerful programming language... (long text here)"""
+print(summarize(text, ratio=0.3))
