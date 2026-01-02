@@ -1,0 +1,10 @@
+import time
+
+text = "Python is amazing!"
+print("Type this:", text)
+start = time.time()
+typed = input(">>> ")
+end = time.time()
+
+speed = len(typed.split()) / ((end - start)/60)
+print(f"Speed: {speed:.2f} WPM")
