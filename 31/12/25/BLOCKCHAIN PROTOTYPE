@@ -1,0 +1,12 @@
+import hashlib, time
+
+class Block:
+    def __init__(self, data, prev_hash="0"):
+        self.data, self.prev_hash = data, prev_hash
+        self.hash = hashlib.sha256((data+prev_hash).encode()).hexdigest()
+        self.timestamp = time.time()
+
+chain = [Block("Genesis")]
+chain.append(Block("Second Block", chain[-1].hash))
+for b in chain:
+    print(b.data, b.hash)
