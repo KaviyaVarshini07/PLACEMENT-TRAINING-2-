@@ -1,0 +1,11 @@
+import threading, requests
+
+def download(url):
+    print("Downloading:", url)
+    data = requests.get(url).content
+    print("Done:", len(data))
+
+urls = ["https://example.com", "https://httpbin.org/get"]
+threads = [threading.Thread(target=download, args=(u,)) for u in urls]
+[t.start() for t in threads]
+[t.join() for t in threads]
