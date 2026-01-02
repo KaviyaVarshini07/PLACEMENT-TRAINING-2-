@@ -1,0 +1,6 @@
+def md_to_html(md_text):
+    html = md_text.replace("# ", "<h1>") + "</h1>"
+    html = html.replace("**", "<b>").replace("<b>", "</b>", 1)
+    return html
+
+print(md_to_html("# Hello World\n**Bold Text**"))
