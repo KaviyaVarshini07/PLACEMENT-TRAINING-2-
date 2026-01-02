@@ -1,0 +1,3 @@
+text = "Python is fun and powerful"
+words = text.split()
+print("Word Count:", len(words))
