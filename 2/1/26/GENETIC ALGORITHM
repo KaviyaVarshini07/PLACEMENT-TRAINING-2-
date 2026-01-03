@@ -1,0 +1,20 @@
+import random
+
+def fitness(x):
+    return -abs(x-42)
+
+def mutate(x):
+    return x + random.choice([-1,1])
+
+population = [random.randint(0,100) for _ in range(10)]
+for generation in range(100):
+    population = sorted(population, key=fitness, reverse=True)
+    if fitness(population[0]) == 0:
+        break
+    new_pop = population[:5]
+    while len(new_pop) < 10:
+        parent = random.choice(new_pop)
+        new_pop.append(mutate(parent))
+    population = new_pop
+
+print("Best:", population[0])
