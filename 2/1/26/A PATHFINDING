@@ -1,0 +1,19 @@
+import heapq
+
+def heuristic(a, b):
+    return abs(a[0]-b[0]) + abs(a[1]-b[1])
+
+def astar(start, goal, neighbors):
+    pq = [(0, start)]
+    g_score = {start: 0}
+    while pq:
+        _, current = heapq.heappop(pq)
+        if current == goal:
+            return g_score[current]
+        for neighbor in neighbors(current):
+            tentative_g = g_score[current] + 1
+            if neighbor not in g_score or tentative_g < g_score[neighbor]:
+                g_score[neighbor] = tentative_g
+                f_score = tentative_g + heuristic(neighbor, goal)
+                heapq.heappush(pq, (f_score, neighbor))
+    return None
