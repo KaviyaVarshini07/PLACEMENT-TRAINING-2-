@@ -1,0 +1,12 @@
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("localhost", 8080))
+server.listen(5)
+
+while True:
+    client, addr = server.accept()
+    request = client.recv(1024).decode()
+    response = "HTTP/1.1 200 OK\n\nHello World"
+    client.sendall(response.encode())
+    client.close()
