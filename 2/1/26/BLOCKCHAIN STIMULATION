@@ -1,0 +1,14 @@
+import hashlib
+
+class Block:
+    def __init__(self, data, prev_hash="0"):
+        self.data = data
+        self.prev_hash = prev_hash
+        self.hash = self.calc_hash()
+
+    def calc_hash(self):
+        return hashlib.sha256((self.data+self.prev_hash).encode()).hexdigest()
+
+chain = [Block("Genesis")]
+chain.append(Block("Second", chain[-1].hash))
+chain.append(Block("
