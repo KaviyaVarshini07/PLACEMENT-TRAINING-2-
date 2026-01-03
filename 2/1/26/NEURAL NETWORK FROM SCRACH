@@ -1,0 +1,47 @@
+import numpy as np
+
+# Activation function (Sigmoid)
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+# Derivative of sigmoid
+def sigmoid_derivative(x):
+    return x * (1 - x)
+
+# Training data (XOR problem)
+X = np.array([[0,0],
+              [0,1],
+              [1,0],
+              [1,1]])
+
+y = np.array([[0],
+              [1],
+              [1],
+              [0]])
+
+# Initialize weights randomly
+np.random.seed(42)
+input_layer_neurons = 2
+hidden_layer_neurons = 2
+output_neurons = 1
+
+# Weights and biases
+wh = np.random.uniform(size=(input_layer_neurons, hidden_layer_neurons))
+bh = np.random.uniform(size=(1, hidden_layer_neurons))
+wo = np.random.uniform(size=(hidden_layer_neurons, output_neurons))
+bo = np.random.uniform(size=(1, output_neurons))
+
+# Training loop
+epochs = 10000
+learning_rate = 0.1
+
+for _ in range(epochs):
+    # Forward pass
+    hidden_input = np.dot(X, wh) + bh
+    hidden_output = sigmoid(hidden_input)
+
+    final_input = np.dot(hidden_output, wo) + bo
+    final_output = sigmoid(final_input)
+
+    # Backpropagation
+    error = y -
