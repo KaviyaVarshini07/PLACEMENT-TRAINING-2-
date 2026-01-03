@@ -1,0 +1,19 @@
+import threading, queue, time
+
+q = queue.Queue()
+
+def producer():
+    for i in range(5):
+        print(f"Producing {i}")
+        q.put(i)
+        time.sleep(1)
+
+def consumer():
+    while True:
+        item = q.get()
+        print(f"Consuming {item}")
+        q.task_done()
+
+threading.Thread(target=producer).start()
+threading.Thread(target=consumer, daemon=True).start()
+q.join()
