@@ -1,0 +1,23 @@
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def mod_inverse(e, phi):
+    for d in range(1, phi):
+        if (e*d) % phi == 1:
+            return d
+    return None
+
+p, q = 61, 53
+n = p*q
+phi = (p-1)*(q-1)
+e = 17
+d = mod_inverse(e, phi)
+
+msg = 65
+cipher = pow(msg, e, n)
+plain = pow(cipher, d, n)
+
+print("Cipher:", cipher)
+print("Plain:", plain)
