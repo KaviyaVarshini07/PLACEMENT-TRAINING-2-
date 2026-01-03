@@ -1,0 +1,11 @@
+from PIL import Image
+
+def image_to_ascii(path):
+    chars = "@%#*+=-:. "
+    img = Image.open(path).convert("L")
+    width, height = img.size
+    img = img.resize((width//10, height//20))
+    pixels = img.getdata()
+    ascii_str = "".join([chars[p//25] for p in pixels])
+    for i in range(0, len(ascii_str), img.width):
+        print(ascii_str[i:i+img.width])
