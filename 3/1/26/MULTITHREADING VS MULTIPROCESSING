@@ -1,0 +1,19 @@
+import threading
+import multiprocessing
+
+def worker(name):
+    print(f"Worker {name} is running")
+
+# Multithreading
+threads = []
+for i in range(3):
+    t = threading.Thread(target=worker, args=(i,))
+    threads.append(t)
+    t.start()
+
+# Multiprocessing
+processes = []
+for i in range(3):
+    p = multiprocessing.Process(target=worker, args=(i,))
+    processes.append(p)
+    p.start()
