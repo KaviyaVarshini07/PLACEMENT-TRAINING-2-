@@ -1,0 +1,14 @@
+import dask.array as da
+
+# Create a large random array
+x = da.random.random((10000, 10000), chunks=(1000, 1000))
+
+# Compute mean across the array
+mean_val = x.mean().compute()
+print("Mean:", mean_val)
+
+# Perform matrix multiplication
+y = da.random.random((10000, 10000), chunks=(1000, 1000))
+z = (x @ y).compute()
+
+print("Matrix multiplication result shape:", z.shape)
