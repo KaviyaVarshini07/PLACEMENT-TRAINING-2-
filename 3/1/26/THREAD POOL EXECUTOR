@@ -1,0 +1,13 @@
+from concurrent.futures import ThreadPoolExecutor
+import time
+
+def task(n):
+    print(f"Task {n} starting")
+    time.sleep(2)
+    print(f"Task {n} done")
+    return n*n
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+    results = list(executor.map(task, range(5)))
+
+print("Results:", results)
