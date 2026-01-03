@@ -1,0 +1,10 @@
+def dfs(maze, start, end, path=[]):
+    path = path + [start]
+    if start == end:
+        return path
+    for move in moves(maze, start):
+        if move not in path:
+            newpath = dfs(maze, move, end, path)
+            if newpath:
+                return newpath
+    return None
