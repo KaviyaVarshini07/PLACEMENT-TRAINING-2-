@@ -1,0 +1,34 @@
+class SharedResource {
+    private boolean available = false;
+
+    public synchronized void produce() throws InterruptedException {
+        while(available) wait();
+        System.out.println("Produced item");
+        available = true;
+        notify();
+    }
+
+    public synchronized void consume() throws InterruptedException {
+        while(!available) wait();
+        System.out.println("Consumed item");
+        available = false;
+        notify();
+    }
+}
+
+public class WaitNotifyDemo {
+    public static void main(String[] args) {
+        SharedResource resource = new SharedResource();
+
+        Thread producer = new Thread(() -> {
+            try { for(int i=0;i<5;i++) resource.produce(); } catch(Exception e){}
+        });
+
+        Thread consumer = new Thread(() -> {
+            try { for(int i=0;i<5;i++) resource.consume(); } catch(Exception e){}
+        });
+
+        producer.start();
+        consumer.start();
+    }
+}
