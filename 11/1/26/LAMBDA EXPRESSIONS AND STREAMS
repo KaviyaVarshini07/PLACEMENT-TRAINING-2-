@@ -1,0 +1,12 @@
+import java.util.*;
+
+public class StreamLambdaDemo {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+
+        names.stream()
+             .filter(n -> n.startsWith("C"))
+             .map(String::toUpperCase)
+             .forEach(System.out::println);
+    }
+}
