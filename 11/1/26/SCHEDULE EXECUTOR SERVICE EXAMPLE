@@ -1,0 +1,11 @@
+import java.util.concurrent.*;
+
+public class SchedulerDemo {
+    public static void main(String[] args) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        Runnable task = () -> System.out.println("Task executed at " + System.currentTimeMillis());
+
+        scheduler.scheduleAtFixedRate(task, 0, 2, TimeUnit.SECONDS);
+    }
+}
