@@ -1,0 +1,17 @@
+import java.io.*;
+import java.net.*;
+
+public class HttpGetDemo {
+    public static void main(String[] args) throws Exception {
+        URL url = new URL("https://jsonplaceholder.typicode.com/posts/1");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line;
+        while((line = in.readLine()) != null) {
+            System.out.println(line);
+        }
+        in.close();
+    }
+}
