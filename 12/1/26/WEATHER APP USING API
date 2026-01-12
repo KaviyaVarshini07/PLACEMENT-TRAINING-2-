@@ -1,0 +1,8 @@
+import requests
+
+city = "London"
+api_key = "your_api_key_here"
+url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+
+data = requests.get(url).json()
+print("Temperature:", data["main"]["temp"], "°C")
