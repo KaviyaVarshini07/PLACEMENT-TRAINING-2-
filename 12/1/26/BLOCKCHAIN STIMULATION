@@ -1,0 +1,16 @@
+import hashlib
+
+class Block:
+    def __init__(self, data, prev_hash=""):
+        self.data = data
+        self.prev_hash = prev_hash
+        self.hash = self.calculate_hash()
+
+    def calculate_hash(self):
+        return hashlib.sha256((self.data + self.prev_hash).encode()).hexdigest()
+
+block1 = Block("First Block")
+block2 = Block("Second Block", block1.hash)
+
+print("Block 1 Hash:", block1.hash)
+print("Block 2 Hash:", block2.hash)
