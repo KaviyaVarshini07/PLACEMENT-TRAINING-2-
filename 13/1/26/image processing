@@ -1,0 +1,21 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+public class ImageGrayScale {
+    public static void main(String[] args) throws Exception {
+        BufferedImage img = ImageIO.read(new File("input.jpg"));
+        for (int y = 0; y < img.getHeight(); y++) {
+            for (int x = 0; x < img.getWidth(); x++) {
+                int p = img.getRGB(x, y);
+                int r = (p >> 16) & 0xff;
+                int g = (p >> 8) & 0xff;
+                int b = p & 0xff;
+                int avg = (r + g + b) / 3;
+                int gray = (avg << 16) | (avg << 8) | avg;
+                img.setRGB(x, y, (p & 0xff000000) | gray);
+            }
+        }
+        ImageIO.write(img, "jpg", new File("output.jpg"));
+    }
+}
