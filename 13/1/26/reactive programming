@@ -1,0 +1,9 @@
+import io.reactivex.rxjava3.core.Observable;
+
+public class RxJavaDemo {
+    public static void main(String[] args) {
+        Observable<Integer> source = Observable.range(1, 5);
+        source.map(i -> i * i)
+              .subscribe(System.out::println);
+    }
+}
