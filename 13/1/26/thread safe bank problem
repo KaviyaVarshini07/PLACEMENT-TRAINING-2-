@@ -1,0 +1,35 @@
+import java.util.concurrent.locks.ReentrantLock;
+
+class BankAccount {
+    private double balance;
+    private final ReentrantLock lock = new ReentrantLock();
+
+    public BankAccount(double initial) { balance = initial; }
+
+    public void deposit(double amount) {
+        lock.lock();
+        try { balance += amount; } finally { lock.unlock(); }
+    }
+
+    public void withdraw(double amount) {
+        lock.lock();
+        try {
+            if (balance >= amount) balance -= amount;
+        } finally { lock.unlock(); }
+    }
+
+    public double getBalance() { return balance; }
+}
+
+public class BankDemo {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(1000);
+        Runnable task = () -> {
+            account.deposit(200);
+            account.withdraw(100);
+            System.out.println("Balance: " + account.getBalance());
+        };
+        new Thread(task).start();
+        new Thread(task).start();
+    }
+}
