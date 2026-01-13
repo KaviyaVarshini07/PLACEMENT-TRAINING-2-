@@ -1,0 +1,22 @@
+import java.lang.annotation.*;
+import java.lang.reflect.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface Info {
+    String author();
+    String date();
+}
+
+class DemoClass {
+    @Info(author = "Alice", date = "2026-01-13")
+    public void display() { System.out.println("Method executed!"); }
+}
+
+public class AnnotationDemo {
+    public static void main(String[] args) throws Exception {
+        Method m = DemoClass.class.getMethod("display");
+        Info info = m.getAnnotation(Info.class);
+        System.out.println("Author: " + info.author());
+        System.out.println("Date: " + info.date());
+    }
+}
