@@ -1,0 +1,25 @@
+import java.lang.annotation.*;
+import java.lang.reflect.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface NotEmpty {}
+
+class User {
+    @NotEmpty String name;
+    User(String name) { this.name = name; }
+}
+
+public class ValidationDemo {
+    public static void main(String[] args) throws Exception {
+        User user = new User("");
+        for (Field f : User.class.getDeclaredFields()) {
+            if (f.isAnnotationPresent(NotEmpty.class)) {
+                f.setAccessible(true);
+                String val = (String) f.get(user);
+                if (val == null || val.isEmpty()) {
+                    System.out.println("Validation failed: " + f.getName() + " cannot be empty");
+                }
+            }
+        }
+    }
+}
