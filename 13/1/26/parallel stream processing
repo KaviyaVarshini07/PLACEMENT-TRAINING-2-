@@ -1,0 +1,11 @@
+import java.util.*;
+import java.util.stream.*;
+
+public class ParallelStreamDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = IntStream.rangeClosed(1, 20).boxed().toList();
+        numbers.parallelStream()
+               .map(n -> n * n)
+               .forEachOrdered(System.out::println);
+    }
+}
