@@ -1,0 +1,24 @@
+import numpy as np
+
+# Sigmoid activation
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+# Training data
+X = np.array([[0,0],[0,1],[1,0],[1,1]])
+y = np.array([[0],[1],[1],[0]])  # XOR
+
+# Initialize weights
+np.random.seed(42)
+weights = np.random.rand(2,1)
+bias = np.random.rand(1)
+
+# Training loop
+for epoch in range(10000):
+    z = np.dot(X, weights) + bias
+    pred = sigmoid(z)
+    error = y - pred
+    weights += np.dot(X.T, error * pred * (1 - pred)) * 0.1
+    bias += np.sum(error * pred * (1 - pred)) * 0.1
+
+print("Final predictions:", sigmoid(np.dot(X, weights) + bias))
