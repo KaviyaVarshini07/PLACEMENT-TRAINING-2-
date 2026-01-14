@@ -1,0 +1,12 @@
+import pandas as pd
+
+# Load data
+data = pd.DataFrame({
+    "Employee": ["Alice", "Bob", "Charlie"],
+    "Sales": [2500, 3000, 4000]
+})
+
+# Save to Excel
+data.to_excel("sales_report.xlsx", index=False)
+
+print("Excel report generated successfully!")
