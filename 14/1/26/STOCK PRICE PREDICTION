@@ -1,0 +1,15 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+data = pd.DataFrame({
+    "day": [1, 2, 3, 4, 5],
+    "price": [100, 102, 104, 107, 110]
+})
+
+X = data[["day"]]
+y = data["price"]
+
+model = LinearRegression()
+model.fit(X, y)
+
+print("Predicted price on day 6:", model.predict([[6]])[0])
