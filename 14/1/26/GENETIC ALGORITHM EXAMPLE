@@ -1,0 +1,24 @@
+import random
+
+def fitness(individual, target):
+    return sum(abs(individual[i] - target[i]) for i in range(len(target)))
+
+def mutate(individual):
+    idx = random.randrange(len(individual))
+    individual[idx] = random.randint(0, 9)
+
+target = [5, 3, 7, 9]
+population = [[random.randint(0, 9) for _ in range(len(target))] for _ in range(10)]
+
+for generation in range(100):
+    population.sort(key=lambda ind: fitness(ind, target))
+    if fitness(population[0], target) == 0:
+        print("Solution found:", population[0])
+        break
+    new_population = population[:2]
+    while len(new_population) < 10:
+        parent = random.choice(population[:5])
+        child = parent[:]
+        mutate(child)
+        new_population.append(child)
+    population = new_population
