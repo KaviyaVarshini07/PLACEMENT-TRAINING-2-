@@ -1,0 +1,19 @@
+import hashlib
+import time
+
+class Block:
+    def __init__(self, index, data, prev_hash):
+        self.index = index
+        self.timestamp = time.time()
+        self.data = data
+        self.prev_hash = prev_hash
+        self.hash = self.calculate_hash()
+
+    def calculate_hash(self):
+        return hashlib.sha256(f"{self.index}{self.timestamp}{self.data}{self.prev_hash}".encode()).hexdigest()
+
+blockchain = [Block(0, "Genesis Block", "0")]
+blockchain.append(Block(1, "Second Block", blockchain[-1].hash))
+
+for block in blockchain:
+    print(vars(block))
