@@ -1,0 +1,6 @@
+from textblob import TextBlob
+
+text = "Python is amazing but debugging can be frustrating sometimes."
+blob = TextBlob(text)
+
+print("Sentiment:", blob.sentiment)
