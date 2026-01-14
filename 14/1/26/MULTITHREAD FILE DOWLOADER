@@ -1,0 +1,16 @@
+import requests, threading
+
+def download_file(url, filename):
+    r = requests.get(url)
+    with open(filename, "wb") as f:
+        f.write(r.content)
+    print(f"Downloaded {filename}")
+
+urls = [
+    ("https://www.example.com/file1.jpg", "file1.jpg"),
+    ("https://www.example.com/file2.jpg", "file2.jpg"),
+]
+
+threads = [threading.Thread(target=download_file, args=u) for u in urls]
+[t.start() for t in threads]
+[t.join() for t in threads]
