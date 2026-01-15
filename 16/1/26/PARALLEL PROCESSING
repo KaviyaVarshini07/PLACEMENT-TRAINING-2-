@@ -1,0 +1,11 @@
+import concurrent.futures
+import time
+
+def square(n):
+    time.sleep(1)
+    return n*n
+
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    results = list(executor.map(square, range(5)))
+
+print("Squares:", results)
