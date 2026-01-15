@@ -1,0 +1,14 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+users = {"admin": "password123"}
+
+@app.route("/login", methods=["POST"])
+def login():
+    creds = request.json
+    if creds["username"] in users and users["password"] == creds["password"]:
+        return jsonify({"message": "Login successful"})
+    return jsonify({"message": "Invalid credentials"}), 401
+
+if __name__ == "__main__":
+    app.run(debug=True)
