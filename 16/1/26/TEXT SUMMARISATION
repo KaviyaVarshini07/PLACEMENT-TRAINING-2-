@@ -1,0 +1,19 @@
+from transformers import pipeline
+
+# Load summarization pipeline
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+
+# Long text input
+text = """
+Artificial Intelligence (AI) is transforming industries across the globe. 
+From healthcare to finance, AI-driven solutions are improving efficiency, 
+reducing costs, and enabling new innovations. However, challenges remain 
+in areas such as ethics, bias, and transparency. As AI continues to evolve, 
+it will be critical to balance technological progress with responsible use.
+"""
+
+# Generate summary
+summary = summarizer(text, max_length=50, min_length=25, do_sample=False)
+
+print("Original Text:\n", text)
+print("\nSummary:\n", summary[0]['summary_text'])
