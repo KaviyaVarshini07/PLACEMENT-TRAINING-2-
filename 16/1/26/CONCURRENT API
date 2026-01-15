@@ -1,0 +1,20 @@
+import aiohttp
+import asyncio
+
+urls = [
+    "https://httpbin.org/get",
+    "https://jsonplaceholder.typicode.com/posts/1",
+    "https://jsonplaceholder.typicode.com/users/1"
+]
+
+async def fetch(session, url):
+    async with session.get(url) as response:
+        data = await response.text()
+        print(f"{url[:40]}... -> {len(data)} characters")
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch(session, url) for url in urls]
+        await asyncio.gather(*tasks)
+
+asyncio.run(main())
