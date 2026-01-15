@@ -1,0 +1,20 @@
+import java.lang.annotation.*;
+import java.lang.reflect.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation {
+    String value();
+}
+
+class Demo {
+    @MyAnnotation("Hello Annotation")
+    public void test() {}
+}
+
+public class AnnotationExample {
+    public static void main(String[] args) throws Exception {
+        Method m = Demo.class.getMethod("test");
+        MyAnnotation ann = m.getAnnotation(MyAnnotation.class);
+        System.out.println("Annotation value: " + ann.value());
+    }
+}
