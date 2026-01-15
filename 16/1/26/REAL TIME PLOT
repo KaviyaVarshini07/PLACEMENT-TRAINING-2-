@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+
+x, y = [], []
+plt.ion()  # interactive mode
+
+for i in range(20):
+    x.append(i)
+    y.append(np.sin(i/2))
+    plt.clf()
+    plt.plot(x, y, marker="o", label="sin wave")
+    plt.legend()
+    plt.pause(0.5)
+
+plt.ioff()
+plt.show()
