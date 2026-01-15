@@ -1,0 +1,23 @@
+import java.util.*;
+
+interface Observer {
+    void update(String msg);
+}
+
+class Subject {
+    private List<Observer> observers = new ArrayList<>();
+    void addObserver(Observer o) { observers.add(o); }
+    void notifyObservers(String msg) {
+        for (Observer o : observers) o.update(msg);
+    }
+}
+
+public class ObserverPattern {
+    public static void main(String[] args) {
+        Subject subject = new Subject();
+        subject.addObserver(m -> System.out.println("Observer1: " + m));
+        subject.addObserver(m -> System.out.println("Observer2: " + m));
+
+        subject.notifyObservers("Event triggered!");
+    }
+}
