@@ -1,0 +1,16 @@
+import operator
+
+ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
+
+def evaluate(expr):
+    tokens = expr.split()
+    stack = []
+    for t in tokens:
+        if t in ops:
+            b, a = stack.pop(), stack.pop()
+            stack.append(ops[t](a,b))
+        else:
+            stack.append(float(t))
+    return stack[0]
+
+print(evaluate("3 4 + 2 * 7 /"))  # (3+4)*2/7
