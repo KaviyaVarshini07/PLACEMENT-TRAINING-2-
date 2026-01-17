@@ -1,0 +1,17 @@
+import asyncio
+import websockets
+
+clients = set()
+
+async def handler(ws, path):
+    clients.add(ws)
+    try:
+        async for msg in ws:
+            await asyncio.wait([c.send(msg) for c in clients if c != ws])
+    finally:
+        clients.remove(ws)
+
+asyncio.get_event_loop().run_until_complete(
+    websockets.serve(handler, "localhost", 8765)
+)
+asyncio.get_event_loop().run_forever()
