@@ -1,0 +1,13 @@
+import numpy as np
+
+M = np.array([[0,0,1,0],
+              [0.5,0,0,0.5],
+              [0.5,0,0,0.5],
+              [0,1,0,0]])
+n = M.shape[0]
+rank = np.ones(n)/n
+
+for _ in range(100):
+    rank = 0.85*M.dot(rank) + 0.15/n
+
+print("PageRank:", rank)
