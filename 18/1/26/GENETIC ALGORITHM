@@ -1,0 +1,12 @@
+import random
+
+def fitness(x): return -(x**2) + 10*x
+
+pop = [random.randint(0,10) for _ in range(10)]
+for gen in range(20):
+    scores = [fitness(x) for x in pop]
+    parents = sorted(zip(scores,pop),reverse=True)[:2]
+    child = (parents[0][1]+parents[1][1])//2
+    pop[random.randint(0,9)] = child
+
+print("Best solution:", max(pop,key=fitness))
