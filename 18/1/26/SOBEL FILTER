@@ -1,0 +1,10 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("image.jpg", 0)
+sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
+sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
+edges = np.sqrt(sobelx**2 + sobely**2)
+
+cv2.imshow("Edges", edges/edges.max())
+cv2.waitKey(0)
