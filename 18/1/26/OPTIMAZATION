@@ -1,0 +1,16 @@
+import math, random
+
+def objective(x): return x**2 + 4*math.sin(5*x)
+def anneal(start=10, temp=1000, cooling=0.99):
+    x = start
+    best = x
+    while temp > 1:
+        new_x = x + random.uniform(-1,1)
+        if objective(new_x) < objective(x) or random.random() < math.exp((objective(x)-objective(new_x))/temp):
+            x = new_x
+            if objective(x) < objective(best):
+                best = x
+        temp *= cooling
+    return best
+
+print("Best solution:", anneal())
