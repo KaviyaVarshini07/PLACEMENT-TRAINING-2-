@@ -1,0 +1,27 @@
+import numpy as np
+
+# Simple 2-layer neural network
+X = np.array([[0,0],[0,1],[1,0],[1,1]])
+y = np.array([[0],[1],[1],[0]])  # XOR
+
+np.random.seed(42)
+W1 = np.random.randn(2,4)
+W2 = np.random.randn(4,1)
+
+for epoch in range(10000):
+    # Forward pass
+    Z1 = X.dot(W1)
+    A1 = 1/(1+np.exp(-Z1))
+    Z2 = A1.dot(W2)
+    A2 = 1/(1+np.exp(-Z2))
+
+    # Backpropagation
+    dZ2 = A2 - y
+    dW2 = A1.T.dot(dZ2)
+    dZ1 = dZ2.dot(W2.T) * A1*(1-A1)
+    dW1 = X.T.dot(dZ1)
+
+    W1 -= 0.1*dW1
+    W2 -= 0.1*dW2
+
+print("Predictions:", A2.round())
