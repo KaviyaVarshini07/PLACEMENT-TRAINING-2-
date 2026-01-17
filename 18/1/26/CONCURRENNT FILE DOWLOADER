@@ -1,0 +1,13 @@
+import aiohttp, asyncio
+
+urls = ["https://www.example.com", "https://www.python.org"]
+
+async def download(session, url):
+    async with session.get(url) as resp:
+        print(f"{url} -> {len(await resp.text())} chars")
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        await asyncio.gather(*(download(session, u) for u in urls))
+
+asyncio.run(main())
