@@ -1,0 +1,11 @@
+import random
+
+def monte_carlo_pi(num_samples=1000000):
+    inside = 0
+    for _ in range(num_samples):
+        x, y = random.random(), random.random()
+        if x*x + y*y <= 1:
+            inside += 1
+    return (inside / num_samples) * 4
+
+print("Estimated π:", monte_carlo_pi())
