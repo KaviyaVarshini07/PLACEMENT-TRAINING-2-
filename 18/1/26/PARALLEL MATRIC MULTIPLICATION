@@ -1,0 +1,14 @@
+import numpy as np
+from multiprocessing import Pool
+
+def multiply_row(args):
+    row, B = args
+    return np.dot(row, B)
+
+A = np.random.randint(0, 10, (4,4))
+B = np.random.randint(0, 10, (4,4))
+
+with Pool() as pool:
+    result = pool.map(multiply_row, [(row, B) for row in A])
+
+print(np.array(result))
