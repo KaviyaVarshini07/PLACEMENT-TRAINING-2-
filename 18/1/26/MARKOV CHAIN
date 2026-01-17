@@ -1,0 +1,22 @@
+import random
+
+def build_markov_chain(text, n=2):
+    words = text.split()
+    chain = {}
+    for i in range(len(words)-n):
+        key = tuple(words[i:i+n])
+        chain.setdefault(key, []).append(words[i+n])
+    return chain
+
+def generate(chain, length=20):
+    key = random.choice(list(chain.keys()))
+    result = list(key)
+    for _ in range(length):
+        next_word = random.choice(chain.get(key, ["END"]))
+        result.append(next_word)
+        key = tuple(result[-len(key):])
+    return " ".join(result)
+
+text = "Python is powerful and fun. Python makes coding enjoyable."
+chain = build_markov_chain(text)
+print(generate(chain))
