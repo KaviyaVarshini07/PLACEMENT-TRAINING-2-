@@ -1,0 +1,22 @@
+import java.util.concurrent.*;
+import java.util.*;
+
+public class ConcurrentMapDemo {
+    public static void main(String[] args) throws InterruptedException {
+        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+
+        Runnable writer = () -> {
+            for (int i = 0; i < 5; i++) {
+                String key = "Key-" + i;
+                map.merge(key, 1, Integer::sum);
+                System.out.println(Thread.currentThread().getName() + " updated " + key);
+                try { Thread.sleep(100); } catch (InterruptedException e) {}
+            }
+        };
+
+        // Launch multiple threads updating the map concurrently
+        Thread t1 = new Thread(writer, "Writer-1");
+        Thread t2 = new Thread(writer, "Writer-2");
+        Thread t3 = new Thread(writer, "Writer-3");
+
+        t1.start(); t2.start(); t3.start();
